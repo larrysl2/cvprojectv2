@@ -1,7 +1,7 @@
 import React from "react";
 import '../Styles/ovstyle.css'
 const Overview = (props) => {
-  const { listofinfo } = props;
+  const { listofinfo }= props;
 
   return (
    
@@ -13,15 +13,21 @@ const Overview = (props) => {
   );
 };
 const EE = (props) =>{
-  const {listofschools}=props;
+  const {listofschools,Editsubmissions,Deleteitem}=props;
+
   return(
     <div className="eeinfodiv">
       <div className="schooname">{listofschools.map((x) => {
-        return <li>{x.titleofstudy}{x.schoolname}{x.dateofstudy}</li>;
+        return <div key={x.schoolname}><li key={x.titleofstudy}>{x.titleofstudy} </li>
+                <li key={x.schoolname}>{x.schoolname} </li>
+                <li key={x.dateofstudy}>{x.dateofstudy} </li>
+                <button onClick={Editsubmissions}>Edit</button>
+                <button onClick={()=>(Deleteitem(x.id))}>Delete</button>
+                </div>;
+        
       })}</div>
       
     </div>
-    
   )
 }
 export {Overview, EE};
