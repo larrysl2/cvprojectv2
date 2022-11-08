@@ -18,10 +18,14 @@ const EE = (props) =>{
   return(
     <div className="eeinfodiv">
       <div className="schooname">{listofschools.map((x) => {
-        return <div key={x.schoolname}><li key={x.titleofstudy}>{x.titleofstudy} </li>
-                <li key={x.schoolname}>{x.schoolname} </li>
-                <li key={x.dateofstudy}>{x.dateofstudy} </li>
-                <button onClick={Editsubmissions}>Edit</button>
+        return <div key={x.id}>
+          <div className="schoolnamebox">
+                <div className = "schoolname" key={x.schoolname}>{x.schoolname} </div>
+                <div className = "date" key={x.dateofstudy}>{x.dateofstudy} </div>
+                </div>
+                <div className = "title" key={x.titleofstudy}>{x.titleofstudy} </div>
+                <button onClick={()=>(Editsubmissions(x))}>Edit</button> 
+                {/* pass in id into edit submissions then set the id state in edit submissions then use that to be updated.  */}
                 <button onClick={()=>(Deleteitem(x.id))}>Delete</button>
                 </div>;
         
