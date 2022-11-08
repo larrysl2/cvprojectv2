@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import uniqid from "uniqid";
+import '../Styles/ovstyle.css'
 import {EE} from "./Overview";
 
 export class schoolparts{
@@ -10,15 +10,15 @@ export class schoolparts{
         this.id=id;
     }
 }
+
 class Educationalexperience extends Component {
   constructor(){
     super();
     this.state={
-        id:"",
+        id:0,
         schoolname:"",
         titleofstudy:"",
         dateofstudy:"",
-        // id: uniqid(),
         listofschools:[],
         isVisible: false,
         editstate:false
@@ -27,7 +27,6 @@ class Educationalexperience extends Component {
 
   schoolnameinput=(e)=>{
     this.setState({
-        id:e.target.value,
         schoolname : e.target.value
     });
   };
@@ -48,53 +47,77 @@ class Educationalexperience extends Component {
         return;
     }
     else{
-        var schoolinfo = new schoolparts(this.state.schoolname,this.state.titleofstudy,this.state.dateofstudy,this.state.id);
+        let schoolinfo = new schoolparts(this.state.schoolname,this.state.titleofstudy,this.state.dateofstudy,this.state.id);
     this.setState({
         listofschools: this.state.listofschools.concat(schoolinfo),
         isVisible:false,
+        id:this.state.id+1
+    })
+    }
+  };
+
+  Editsubmissions=(x)=>{
+    this.setState({
+        editstate:true,
+        id:x.id,
+        schoolname:x.schoolname,
+        titleofstudy:x.titleofstudy,
+        dateofstudy:x.dateofstudy
+    })
+  
+  };
+
+  Submitedit=(e)=>{
+    e.preventDefault();
+    var schoolinfo = new schoolparts(this.state.schoolname,this.state.titleofstudy,this.state.dateofstudy,this.state.id);
+    const newlistofschools = this.state.listofschools.slice();
+    newlistofschools.splice(this.state.id,1,schoolinfo);
+    console.log(e)
+    this.setState({
+        listofschools:newlistofschools,
+        editstate:false,
+    });
+  }
+
+  Displayform=()=>{
+    this.setState({
+        isVisible:true,
+        editstate:false,
         schoolname:"",
         titleofstudy:"",
         dateofstudy:"",
-        editstate:false,
-        id:""
+    });
+  }
+
+  editschoolname(value){
+    this.setState({
+         schoolname: value
     });
     }
-  };
-  Editsubmissions=()=>{
+
+edittitle(value){
     this.setState({
-        schoolname:this.state.schoolname,
-        titleofstudy:this.state.titleofstudy,
-        dateofstudy:this.state.dateofstudy,
-        editstate:true
-        
+         titleofstudy: value
     });
-  }
-  Submitedit=()=>{
-    //somehow take the edited version and replace in the array at the point where the button was clicked. So some kind of swap
-  }
-  //takes the current values and sets the state to them which then can be used to update the input fields?
-  Displayform=(e)=>{
+}
+
+editdate(value){
     this.setState({
-        isVisible:true,
-        editstate:false
+         dateofstudy: value,
     });
-  }
-  
+}
+
   Deleteitem=(id)=>{
     this.setState((prevState)=>({
         listofschools:prevState.listofschools.filter((education) => education.id!=id),
     }))
   };
-  onChange=(e)=>{
-    this.setState(
-        {[e.target.name]:e.target.value}
-    );
-  }
+
   render(){
     const{schoolname,titleofstudy,dateofstudy,listofschools}=this.state;
     return(
-      <div>
-        Educational Experience
+      <div >
+        <div className="EE">Educational Experience</div>
         <div>
             <button onClick={this.Displayform}>Add Educational Experience</button>
             <form onSubmit={this.Submiteducationalform}>
@@ -103,8 +126,10 @@ class Educationalexperience extends Component {
             { this.state.isVisible &&<input onChange={this.dateofstudyinput} value ={dateofstudy} type="text" placeholder='Start date' id='dateofstudy' />}
             { this.state.isVisible && <button>Submit Educational Experience </button>}
             </form>
-            <form onSubmit={this.Editsubmissions}>
-            { this.state.editstate && <input value={this.state.schoolname} onChange={(value) => this.onChange(value)} type="text" placeholder='School' id='schoolname' />}
+            <form onSubmit={this.Submitedit}>
+            { this.state.editstate && <input value={this.state.schoolname} onChange={e => this.editschoolname(e.target.value)} type="text" placeholder='School' id='editschoolname' />}
+            { this.state.editstate && <input value={this.state.titleofstudy} onChange={e => this.edittitle(e.target.value)} type="text" placeholder='Title of Study' id='edittitle' />}
+            { this.state.editstate && <input value={this.state.dateofstudy} onChange={e => this.editdate(e.target.value)} type="text" placeholder='Date of Study' id='editdate' />}
             { this.state.editstate && <button>Submit Educational Experience Edit</button>}
             </form>
         </div>
