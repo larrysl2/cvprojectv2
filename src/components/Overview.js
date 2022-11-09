@@ -34,4 +34,32 @@ const EE = (props) =>{
     </div>
   )
 }
-export {Overview, EE};
+const PE = (props) =>{
+  const {companylist,Editsubmission,Deleteitem}=props;
+
+  return(
+    <div className="eeinfodiv">
+      <div className="schooname">{companylist.map((x) => {
+        return <div key={x.id}>
+          <div className="companenamebox">
+                <div className = "companyname" key={x.companyname}>{x.companyname} </div>
+                <div className = "positionbox">
+                <div className = "positiontitle" key={x.positiontitle}>{x.positiontitle} </div>
+                <div className = "Dates" key={x.startdate}>{x.startdate}-{x.enddate} </div>
+                </div>
+                <li className = "maintasks" key={x.maintasks}>{x.maintasks} </li>
+                
+                
+               
+                </div>
+                <button onClick={()=>(Editsubmission(x))}>Edit</button> 
+                {/* pass in id into edit submissions then set the id state in edit submissions then use that to be updated.  */}
+                <button onClick={()=>(Deleteitem(x.id))}>Delete</button>
+                </div>;
+        
+      })}</div>
+      
+    </div>
+  )
+}
+export {Overview, EE,PE};
