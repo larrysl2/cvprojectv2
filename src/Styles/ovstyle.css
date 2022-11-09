@@ -2,6 +2,7 @@
  
     display: block;
     font-size: 75px;
+    font-weight: bold;
 }
 .personalinfodiv{
     
@@ -17,6 +18,7 @@
 .eeinfodiv{
     
     display:box;
+    
 }
 .schoolnamebox{
    
@@ -24,17 +26,22 @@
 }
 .schoolname{
     display:inline-flex;
-    font-size: 50px;
-   
+    font-size: 40px;
+    padding-left: 10%;
+    font-weight: bold;
+    
 }
 .date{
     margin-left: auto;
     font-size: 30px;
+    font-style: italic;
+    padding-right: 10%;
 }
 .title{
     display:box;
     font-size: 25px;
-  
+    font-style: italic;
+    padding-left: 10%;
 }
 .EE{
     font-size:50px;
@@ -46,4 +53,36 @@
     font-size:50px;
     display:flex;
     justify-content: center;
+}
+.PE{
+    font-size:50px;
+    display:flex;
+    justify-content: center;
+    border-bottom:solid;
+}
+.companynamebox{
+    font-size:50px;
+    display:flex;
+    justify-content: center;
+    border-bottom:solid;
+}
+.positionbox{
+    display:flex;
+    font-style: italic;
+    font-size: 30px;
+    padding-left: 10%;
+}
+.Dates{
+    margin-left: auto;
+    font-size: 30px;
+    padding-right: 10%;
+}
+.companyname{
+    font-size:40px;
+    padding-left: 10%;
+    font-weight: bold;
+}
+.maintasks{
+    font-size:30px;
+    padding-left: 10%;
 }
