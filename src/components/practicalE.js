@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import '../Styles/ovstyle.css'
 import {PE} from "./Overview";
-
+import {EXPPE} from "./Overview";
+import { listofschools } from './educationalexperience';
+//setting the experience
 export class practicalparts{
     constructor(companyname,positiontitle,maintasks,startdate,enddate){
         this.companyname=companyname;
@@ -141,7 +143,7 @@ editenddate(value){
   };
 
   render(){
-    const{companyname,positiontitle,maintasks,startdate,enddate,companylist}=this.state;
+    const{companyname,positiontitle,maintasks,startdate,enddate,companylist,listofschools}=this.state;
     return(
       <div >
         <div className="PE">Practical Experience</div>
@@ -151,20 +153,23 @@ editenddate(value){
             { this.state.isVisible && <input onChange={this.companynameinput} value ={companyname} type="text" placeholder='Company Name' id='companyname' />}
             { this.state.isVisible && <input onChange={this.positiontitleinput} value ={positiontitle} type="text" placeholder='Position Title' id='Position Title' />}
             { this.state.isVisible &&<input onChange={this.maintasksinput} value ={maintasks} type="text" placeholder='Main Tasks' id='maintasks' />}
-            { this.state.isVisible &&<input onChange={this.startdateinput} value ={startdate} type="text" placeholder='Start date' id='startdate' />}
-            { this.state.isVisible &&<input onChange={this.enddateinput} value ={enddate} type="text" placeholder='End date' id='enddate' />}
+            { this.state.isVisible &&<input onChange={this.startdateinput} value ={startdate} type="month" placeholder='Start date' id='startdate' />}
+            { this.state.isVisible &&<input onChange={this.enddateinput} value ={enddate} type="month" placeholder='End date' id='enddate' />}
             { this.state.isVisible && <button>Submit Educational Experience </button>}
             </form>
             <form onSubmit={this.Submitedit}>
             { this.state.editstate && <input value={this.state.companyname} onChange={e => this.editcompanyname(e.target.value)} type="text" placeholder='Company Name' id='companyname' />}
             { this.state.editstate && <input value={this.state.positiontitle} onChange={e => this.editpositiontitle(e.target.value)} type="text" placeholder='Position Title' id='Position Title' />}
             { this.state.editstate && <input value={this.state.maintasks} onChange={e => this.editmaintasks(e.target.value)} type ="text" placeholder='Main Tasks' id='maintasks' />}
-            { this.state.editstate && <input value={this.state.startdate} onChange={e => this.editstartdate(e.target.value)} type="text" placeholder='Date of Study' id='editdate' />}
-            { this.state.editstate && <input value={this.state.enddate} onChange={e => this.editenddate(e.target.value)} type="text" placeholder='Date of Study' id='editdate' />}
+            { this.state.editstate && <input value={this.state.startdate} onChange={e => this.editstartdate(e.target.value)} type="month" placeholder='Date of Study' id='editdate' />}
+            { this.state.editstate && <input value={this.state.enddate} onChange={e => this.editenddate(e.target.value)} type="month" placeholder='Date of Study' id='editdate' />}
             { this.state.editstate && <button>Submit Practical Experience Edit</button>}
             </form>
         </div>
         <PE companylist={companylist} Editsubmission={this.Editsubmission} Deleteitem={this.Deleteitem}/>
+        <div className="exportpage">
+        <EXPPE companylist={companylist} listofschools={listofschools}/>
+        </div>
       </div>
     )
   }
