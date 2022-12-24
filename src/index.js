@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import Generalinfo from './App';
 import Educationalexperience from './components/Educationalexperience';
 import Practicalexperience from './components/practicalE';
+// import Cv from './cv';
 
 
 
@@ -12,6 +13,7 @@ root.render(
     <Generalinfo/>
     <Educationalexperience/>
     <Practicalexperience/>
+    {/* <Cv/> */}
   </React.StrictMode>
 );
 

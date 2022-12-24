@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import '../Styles/ovstyle.css'
 import {EE} from "./Overview";
+
+
 //setting the educational experience
 export class schoolparts{
     constructor(schoolname,titleofstudy,dateofstudy,enddateofstudy,id){
@@ -121,7 +123,7 @@ editdate(value){
          dateofstudy: value,
     });
 }
-editdate(value){
+endeditdate(value){
   this.setState({
        enddateofstudy: value,
   });
@@ -134,7 +136,9 @@ editdate(value){
   };
 
   render(){
-    const{schoolname,titleofstudy,dateofstudy,listofschools,enddateofstudy}=this.state;
+    const{titleofstudy,dateofstudy,enddateofstudy}=this.state;
+    const schoolname = this.state.schoolname;
+    const listofschools = this.state.listofschools;
     return(
       <div >
         <div className="EE">Educational Experience</div>
@@ -155,10 +159,12 @@ editdate(value){
             { this.state.editstate && <button>Submit Educational Experience Edit</button>}
             </form>
         </div>
+        <div id='ee'>
         <EE listofschools={listofschools} Editsubmissions={this.Editsubmissions} Deleteitem={this.Deleteitem}/>
+        </div>
       </div>
     )
   }
 }
 
-export {Educationalexperience};
+export default Educationalexperience;

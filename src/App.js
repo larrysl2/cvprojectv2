@@ -1,15 +1,15 @@
-import { isVisible } from '@testing-library/user-event/dist/utils';
+import './Styles/ovstyle.css';
 import React, { Component } from 'react';
 import uniqid from "uniqid";
-import Overview from "./components/Overview";
-
+import {Overview} from "./components/Overview";
+//setting the header states
 class Generalinfo extends Component {
   constructor(){
     super();
     this.state = {
       name:"",
-      email:"",
       phone:"",
+      email:"",
       listofinfo : [],
       id: uniqid(),
       isVisible: true
@@ -18,29 +18,41 @@ class Generalinfo extends Component {
   handleChangename = (e) => {
     this.setState({
         name: e.target.value,
-
+        id: this.state.name.id
+    });
+  };
+  handleChangephone= (e) => {
+    this.setState({
+       phone: e.target.value, 
     });
   };
   handleChangeemail= (e) => {
     this.setState({
-        
-        email: e.target.value
+       email: e.target.value,
     });
   };
+  
   onSubmitTask = (e) => {
     e.preventDefault();
+    if (this.state.email==""||this.state.name==""||this.state.phone==""){
+      alert("Please complete form fully or enter NA.");
+      return;
+    }
+    else {
     this.setState({
-      listofinfo: this.state.listofinfo.concat(this.state.name,this.state.email),
+      listofinfo: this.state.listofinfo.concat(this.state.name,this.state.phone,this.state.email),
       isVisible:false
-      
     });
-    //on click set state to seen. then in html. if seen set styledisply to none instead of block
+    }
   };
 
   render() {
-    const {name,email,listofinfo} = this.state;
+    const {name,phone,email,listofinfo} = this.state;
     return (
     <div>
+       { this.state.isVisible &&<div className="personalinfo">
+      Personal Info 
+    </div>}
       <form onSubmit={this.onSubmitTask}>
       {this.state.isVisible &&
       <input
@@ -50,7 +62,16 @@ class Generalinfo extends Component {
         id="nameInput"
         placeholder = "Name"
       />
-  }
+      }
+      {this.state.isVisible &&
+      <input
+        onChange={this.handleChangephone}
+        value={phone}
+        type="text"
+        id="nameInput"
+        placeholder = "Phone"
+      />
+      }
       {this.state.isVisible &&
       <input
         onChange={this.handleChangeemail}
@@ -60,15 +81,18 @@ class Generalinfo extends Component {
         placeholder = "Email"
       />
       }
+     
       {this.state.isVisible &&
           <button type="submit">
-            Add Name
+            Submit Info
           </button>
-  }
+      }
       </form>
       <Overview listofinfo={listofinfo} />
     </div>
     );
   }
 }
+
+
 export default Generalinfo;
